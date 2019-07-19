@@ -21,6 +21,6 @@ jdk:
 
 script:
 - ./gradlew clean build -x test
-- docker build -t kwonghung/spring-boot-k8s-secret .
+- docker build -t kwonghung/spring-boot-k8s-secret --build-arg BUILD_JAR_FILE=spring-boot-k8s-secret-0.0.1-SNAPSHOT.jar .
 - echo "$DOCKER_HUB_PASSWD" | docker login --username "$DOCKER_HUB_LOGIN" --password-stdin
 - docker push kwonghung/spring-boot-k8s-secret
