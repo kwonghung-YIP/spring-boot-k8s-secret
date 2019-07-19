@@ -1,0 +1,21 @@
+---
+spring:
+  profiles: default
+  
+  datasource:
+    url: jdbc:mysql://dockerce01:3306/mysql
+    username: root
+    password: password
+
+---
+spring:
+  profiles: k8s
+  
+  datasource:
+    url: jdbc:mysql://mysql-svc:3306/testdb
+    username: testuser
+    password: passw0rd
+    
+k8s:
+  secret-mount:
+  - /run/secrets/mysql-secret
