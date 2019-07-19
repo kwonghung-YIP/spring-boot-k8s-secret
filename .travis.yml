@@ -20,4 +20,4 @@ jdk:
 - oraclejdk8
 
 script:
-- ./gradlew clean build -x test --scan -s
+- ./gradlew clean build -x test
