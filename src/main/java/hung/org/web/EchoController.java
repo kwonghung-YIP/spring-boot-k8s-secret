@@ -1,8 +1,11 @@
 package hung.org.web;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -18,17 +21,39 @@ public class EchoController {
 	private JdbcTemplate jdbcTemplate;
 	
 	@GetMapping
-	public Date echoTime() {
-		Date date = jdbcTemplate.query("SELECT SYSDATE()",new ResultSetExtractor<Date>() {
+	public Echo echo(HttpSession httpSession) {
+		Echo echo = jdbcTemplate.query("SELECT USER() as user, VERSION() as ver, DATABASE() as db",new ResultSetExtractor<Echo>() {
 
 			@Override
-			public Date extractData(ResultSet rs) throws SQLException, DataAccessException {
+			public Echo extractData(ResultSet rs) throws SQLException, DataAccessException {
+				Echo echo = new Echo();
 				rs.next();
-				return rs.getDate(1);
+				echo.dbUser = rs.getString("user");
+				echo.dbVersion = rs.getString("version");
+				echo.database = rs.getString("db");
+				
+				return echo;
 			}
 			
 		});
-		return date;
+		echo.sessionId = httpSession.getId();
+		try {
+			echo.ip = InetAddress.getLocalHost();
+			echo.hostname = echo.ip.getHostName();
+		} catch (UnknownHostException e) {
+			echo.hostname = "Unknown!!";
+		}
+		
+		return echo;
 	}
 
+	static public class Echo {
+		
+		String sessionId;
+		InetAddress ip;
+		String hostname;
+		String dbUser;
+		String dbVersion;
+		String database;
+	}
 }
