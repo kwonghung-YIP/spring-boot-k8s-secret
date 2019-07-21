@@ -14,6 +14,8 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import hung.org.pojo.Echo;
+
 @RestController
 public class EchoController {
 	
@@ -45,15 +47,5 @@ public class EchoController {
 		}
 		
 		return echo;
-	}
-
-	static public class Echo {
-		
-		String sessionId;
-		InetAddress ip;
-		String hostname;
-		String dbUser;
-		String dbVersion;
-		String database;
 	}
 }
