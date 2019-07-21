@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-svc
+  labels:
+    app: mysql
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3306
+    targetPort: 3306
+  selector:
+    app: mysql
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+  labels:
+    app: mysql
+spec:
+  containers:
+  - name: mysql-server
+    image: mysql:8.0
+    env:
+      - name: MYSQL_RANDOM_ROOT_PASSWORD
+        value: "yes"
+      - name: MYSQL_DATABASE
+        value: testdb
+      - name: MYSQL_USER
+        valueFrom: 
+          secretKeyRef:
+            name: mysql-secret
+            key: mysql-user
+      - name: MYSQL_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: mysql-passwd
+    ports:
+    - containerPort: 3306
+---
+apiVersion: v1
+kind: Secret
+metadata: 
+  name: mysql-secret
+  labels:
+    app: mysql
+type: Opaque
+stringData:
+  mysql-user: testuser
+  mysql-passwd: passw0rd
