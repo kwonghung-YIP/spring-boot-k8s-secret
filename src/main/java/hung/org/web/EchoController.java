@@ -29,7 +29,7 @@ public class EchoController {
 				Echo echo = new Echo();
 				rs.next();
 				echo.dbUser = rs.getString("user");
-				echo.dbVersion = rs.getString("version");
+				echo.dbVersion = rs.getString("ver");
 				echo.database = rs.getString("db");
 				
 				return echo;
