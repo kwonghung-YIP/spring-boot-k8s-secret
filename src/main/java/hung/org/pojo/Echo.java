@@ -1,5 +1,7 @@
 package hung.org.pojo;
 
+import java.net.InetAddress;
+
 public class Echo {
 		
 		public String sessionId;
