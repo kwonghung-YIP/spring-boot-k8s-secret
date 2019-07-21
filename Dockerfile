@@ -10,4 +10,4 @@ WORKDIR /usr/local/springboot
 COPY build/libs/$BUILD_JAR_FILE /usr/local/springboot
 
 #CMD ["./gradlew", "bootRun"]
-CMD ["sh","-c","java $JAVA_OPTS" -jar $BUILD_JAR_FILE"]
+CMD ["sh","-c","java $JAVA_OPTS -jar $BUILD_JAR_FILE"]
