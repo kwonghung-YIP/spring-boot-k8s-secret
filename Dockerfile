@@ -7,4 +7,4 @@ ENV BUILD_JAR_FILE=$BUILD_JAR_FILE
 COPY build/libs/$BUILD_JAR_FILE .
 
 #CMD ["./gradlew", "bootRun"]
-CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","build/libs/${BUILD_JAR_FILE}"]
+CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","${BUILD_JAR_FILE}"]
