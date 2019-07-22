@@ -40,3 +40,4 @@ spec:
       name: redis-config
       items:
       - key: redis.conf
+        path: redis.conf
