@@ -7,8 +7,8 @@ metadata:
 spec:
   rules:
   - http:
-    paths:
-    - path: /app
-      backend:
-        serviceName: springboot-svc
-        servicePort: 8080
+      paths:
+      - path: /app
+        backend:
+          serviceName: springboot-svc
+          servicePort: 8080
