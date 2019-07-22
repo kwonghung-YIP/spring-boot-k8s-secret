@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: springboot-ingress
   annotations:
-  nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
