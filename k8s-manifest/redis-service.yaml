@@ -36,6 +36,11 @@ spec:
   - name: redis-data
     emptyDir: {}
   - name: redis-config
+#
+# Create redis-config configMap will following command:
+#
+# kubectl create configmap redis-config --from-file redis.conf
+#  
     configMap:
       name: redis-config
       items:

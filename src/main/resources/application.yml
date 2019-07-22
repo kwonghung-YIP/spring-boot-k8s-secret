@@ -23,7 +23,7 @@ spring:
   redis:
     host: redis-svc
     port: 6379
-    #password: passw0rd
+    password: passw0rd
     
 k8s:
   secret-mount:
