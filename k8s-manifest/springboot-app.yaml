@@ -33,3 +33,17 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: k8s
+        volumeMounts:
+        - name: mysql-secret
+          mountPath: "/usr/local/k8s/mysql-secret"
+          readOnly: true
+        - name: redis-secret
+          mountPath: "/usr/local/k8s/redis-secret"
+          readOnly: true
+      volumes:
+      - name: mysql-secret
+        secret:
+          secretName: mysql-secret
+      - name: redis-secret
+        secret:
+          secretName: redis-secret
