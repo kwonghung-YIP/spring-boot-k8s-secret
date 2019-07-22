@@ -5,7 +5,7 @@ Binding spring boot password (e.g. spring.database.password) property into k8s s
 ```bash
 sudo microk8s.reset
 sudo microk8s.enable dns ingress
-sudo iptables -P FORWARD ACCET
+sudo iptables -P FORWARD ACCEPT
 
 git clone https://github.com/kwonghung-YIP/spring-boot-k8s-secret.git
 cd spring-boot-k8s-secret/k8s-manifest
