@@ -8,6 +8,10 @@ spring:
     password: password
 
 ---
+servlet:
+  session:
+    store-type: redis
+    
 spring:
   profiles: k8s
   
@@ -15,6 +19,11 @@ spring:
     url: jdbc:mysql://mysql-svc:3306/testdb
     username: testuser
     password: passw0rd
+  
+  redis:
+    host: redis-svc
+    port: 6379
+    #password: passw0rd
     
 k8s:
   secret-mount:
