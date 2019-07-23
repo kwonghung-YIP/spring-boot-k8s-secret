@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Profile("formAuth")
 @Configuration
 @EnableWebSecurity
-public class FormWebSecurityConfig2 extends WebSecurityConfigurerAdapter {
+public class FormWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {

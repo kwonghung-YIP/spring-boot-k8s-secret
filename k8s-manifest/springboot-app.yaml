@@ -40,6 +40,9 @@ spec:
         - name: redis-secret
           mountPath: "/usr/local/k8s/redis-secret"
           readOnly: true
+        - name: user-secret
+          mountPath: "/usr/local/k8s/user-secret"
+          readOnly: true         
       volumes:
       - name: mysql-secret
         secret:
@@ -47,3 +50,7 @@ spec:
       - name: redis-secret
         secret:
           secretName: redis-secret
+      - name: user-secret
+        secret:
+          secretName: user-secret
+          
