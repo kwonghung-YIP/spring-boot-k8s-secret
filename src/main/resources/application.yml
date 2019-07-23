@@ -25,10 +25,10 @@ k8s:
 servlet:
   session:
     store-type: redis
-    
+  
 spring:
   profiles: k8s
-  
+ 
   datasource:
     url: jdbc:mysql://mysql-svc:3306/testdb
     #username: testuser    
@@ -48,7 +48,10 @@ spring:
       password: ${k8s-secret.user-secret.passwd}
       roles:
       - admin
-    
+  
+  servlet:
+    context-path: /app
+
 k8s:
   secret-mount:
   - /usr/local/k8s/mysql-secret
