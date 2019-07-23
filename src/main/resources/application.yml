@@ -1,18 +1,21 @@
----
 servlet:
   session:
     store-type: none
 
 spring:
   profiles: local
-  
   datasource:
     url: jdbc:mysql://dockerce01:3306/mysql
     username: root
     password: password
-
-test: ${k8s-secret.apache-tomcat-9.0.20.NOTICE}
-
+  
+  security:
+    user:
+      name: john
+      password: abcd1234 
+      roles:
+      - admin
+  
 k8s:
   secret-mount:
   - d:/Tools/apache-tomcat-9.0.20

@@ -32,7 +32,7 @@ spec:
         - containerPort: 8080
         env:
         - name: SPRING_PROFILES_ACTIVE
-          value: k8s
+          value: k8s,basicAuth
         volumeMounts:
         - name: mysql-secret
           mountPath: "/usr/local/k8s/mysql-secret"
