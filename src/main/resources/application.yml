@@ -49,8 +49,8 @@ spring:
       roles:
       - admin
   
-  servlet:
-    context-path: /app
+  #servlet:
+  #  context-path: /app
 
 k8s:
   secret-mount:
