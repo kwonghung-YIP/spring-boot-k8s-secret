@@ -8,10 +8,12 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/proxy-redirect-from: "on"
     nginx.ingress.kubernetes.io/proxy-redirect-to: http://$proxy_host:8080/login /app/login
 spec:
   rules:
-  - http:
+  - host: app.k8s-demo.org
+    http:
       paths:
       - path: /app(/|$)(.*)
         backend:
