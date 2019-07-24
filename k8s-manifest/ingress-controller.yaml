@@ -1,14 +1,19 @@
+## Nginx Ingress Controller configuration reference
+## https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/
+
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: springboot-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/proxy-redirect-to: http://$proxy_host:8080/login /app/login
 spec:
   rules:
   - http:
       paths:
-      - path: /app
+      - path: /app(/|$)(.*)
         backend:
           serviceName: springboot-svc
           servicePort: 8080
