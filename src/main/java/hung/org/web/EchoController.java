@@ -2,6 +2,7 @@ package hung.org.web;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.security.Principal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -23,7 +24,7 @@ public class EchoController {
 	private JdbcTemplate jdbcTemplate;
 	
 	@GetMapping
-	public Echo echo(HttpSession httpSession) {
+	public Echo echo(HttpSession httpSession, Principal principal) {
 		Echo echo = jdbcTemplate.query("SELECT USER() as user, VERSION() as ver, DATABASE() as db",new ResultSetExtractor<Echo>() {
 
 			@Override
@@ -38,10 +39,11 @@ public class EchoController {
 			}
 			
 		});
+		echo.loginName = principal.getName();
 		echo.sessionId = httpSession.getId();
 		try {
-			echo.ip = InetAddress.getLocalHost();
-			echo.hostname = echo.ip.getHostName();
+			echo.hostIp = InetAddress.getLocalHost().getHostAddress();
+			echo.hostname = InetAddress.getLocalHost().getHostName();
 		} catch (UnknownHostException e) {
 			echo.hostname = "Unknown!!";
 		}
