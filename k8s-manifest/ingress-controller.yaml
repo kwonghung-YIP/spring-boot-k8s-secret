@@ -7,15 +7,12 @@ metadata:
   name: springboot-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/proxy-redirect-from: "on"
-    nginx.ingress.kubernetes.io/proxy-redirect-to: http://$proxy_host:8080/login /app/login
+    nginx.ingress.kubernetes.io/affinity: cookie
 spec:
   rules:
-  - host: app.k8s-demo.org
+  - host: form-login.hung.org
     http:
       paths:
-      - path: /app(/|$)(.*)
-        backend:
+      - backend:
           serviceName: springboot-svc
           servicePort: 8080
