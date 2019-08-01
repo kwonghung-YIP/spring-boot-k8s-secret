@@ -7,7 +7,7 @@ spec:
   - port: 8080
     targetPort: 8080
   selector:
-    pod-name: abc
+    pod-name: springboot-pod
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -17,12 +17,12 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      pod-name: abc
+      pod-name: springboot-pod
   template:
     metadata:
       name: springboot-pod
       labels:
-        pod-name: abc
+        pod-name: springboot-pod
     spec:
       containers:
       - name: springboot-app
@@ -32,7 +32,7 @@ spec:
         - containerPort: 8080
         env:
         - name: SPRING_PROFILES_ACTIVE
-          value: k8s,basicAuth
+          value: k8s,formAuth
         volumeMounts:
         - name: mysql-secret
           mountPath: "/usr/local/k8s/mysql-secret"
