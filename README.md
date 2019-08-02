@@ -2,7 +2,7 @@
 This repo shows how to bind k8s secrets into spring boot password properties (e.g. spring.database.password).
 
 # application.yaml
-The sample [application.yml](/src/main/resources/application.yml) in this demo defines the password properties for mysql, redis
+The sample [application.yml](/src/main/resources/application.yml) in this demo has the password properties for mysql and redis db, also the predefined user login for spring-security.
 
 ```yaml
 spring:
