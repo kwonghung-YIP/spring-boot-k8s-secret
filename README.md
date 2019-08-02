@@ -79,8 +79,9 @@ spec:
         secret:
           secretName: user-secret
 ```
+# EnvironmentPostProcessor Implementation
 
-## Run the demo in [Katacoda - Kubernetes Playground](https://www.katacoda.com/courses/kubernetes/playground)
+## Run this demo in [Katacoda - Kubernetes Playground](https://www.katacoda.com/courses/kubernetes/playground)
 ```bash
 git clone https://github.com/kwonghung-YIP/spring-boot-k8s-secret.git
 cd spring-boot-k8s-secret/k8s-manifest
@@ -96,7 +97,7 @@ kubectl apply -f springboot-app.yaml
 curl -v --user john:abcd1234 <springboot-svc's ClusterIP>:8080
 ```
 
-## Run the demo with you local Microk8s
+## Run this demo in your local Microk8s
 ```bash
 git clone https://github.com/kwonghung-YIP/spring-boot-k8s-secret.git
 cd spring-boot-k8s-secret/k8s-manifest
