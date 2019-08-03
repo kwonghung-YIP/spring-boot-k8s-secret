@@ -8,7 +8,7 @@ The sample [application.yml](/src/main/resources/application.yml) has following 
 * the password for redis db: spring.redis.password
 * the embedded user credentials for spring security: spring.security.user.name, spring.security.user.password
 
-The **k8s.secret-mount** property at the bottom is a list, which includes all the paths where the k8s secrets bind with the spring boot image. Take the environment property **${k8s-secret.mysql-secret.mysql-passwd}** as example, the first portion **k8s-secret** is the prefix to indicate that property is read from k8s secret, the second portion **mysql-secret** is mapped with **/usr/local/k8s/mysql-secret**, the third portion, **mysql-passwd** is the entry provided within the secret.
+The **k8s.secret-mount** property at the bottom is a list, which includes all paths where the k8s secrets bind with the spring boot image. Take the mysql password - **${k8s-secret.mysql-secret.mysql-passwd}** as example, the first portion **k8s-secret** is the prefix to indicate that property is read from k8s secret, and the second portion **mysql-secret** is mapped with **/usr/local/k8s/mysql-secret**, finally the third portion, **mysql-passwd** is the entry provided within the secret.
 
 ```yaml
 spring:
