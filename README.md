@@ -86,6 +86,9 @@ spec:
           secretName: user-secret
 ```
 # EnvironmentPostProcessor Implementation
+```properties
+org.springframework.boot.env.EnvironmentPostProcessor=hung.org.K8sSecretPostProcessor
+```
 
 ## Run this demo in [Katacoda - Kubernetes Playground](https://www.katacoda.com/courses/kubernetes/playground)
 ```bash
