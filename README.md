@@ -1,7 +1,7 @@
 # Introduction
 This repo shows how to bind k8s secrets into spring boot password properties (e.g. spring.database.password).
 
-# application.yml
+## application.yml
 The sample [application.yml](/src/main/resources/application.yml) has following properties bind to other environment properties, which utimately are read from k8s secrets:
 
 * the user credentials for mysql db: spring.datasource.username, spring.datasource.password
@@ -38,7 +38,7 @@ k8s:
   - /usr/local/k8s/user-secret
 ```
 
-# k8s deployment manifest for spring boot application
+## k8s deployment manifest for spring boot application
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -85,12 +85,13 @@ spec:
         secret:
           secretName: user-secret
 ```
-# EnvironmentPostProcessor Implementation
+## EnvironmentPostProcessor Implementation
+
 ```properties
 org.springframework.boot.env.EnvironmentPostProcessor=hung.org.K8sSecretPostProcessor
 ```
 
-## Run this demo in [Katacoda - Kubernetes Playground](https://www.katacoda.com/courses/kubernetes/playground)
+# Run this demo in [Katacoda - Kubernetes Playground](https://www.katacoda.com/courses/kubernetes/playground)
 ```bash
 git clone https://github.com/kwonghung-YIP/spring-boot-k8s-secret.git
 cd spring-boot-k8s-secret/k8s-manifest
@@ -106,7 +107,7 @@ kubectl apply -f springboot-app.yaml
 curl -v --user john:abcd1234 <springboot-svc's ClusterIP>:8080
 ```
 
-## Run this demo in your local Microk8s
+# Run this demo in your local Microk8s
 ```bash
 git clone https://github.com/kwonghung-YIP/spring-boot-k8s-secret.git
 cd spring-boot-k8s-secret/k8s-manifest
