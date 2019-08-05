@@ -2,11 +2,11 @@
 This repo shows how to bind k8s secrets into spring boot password properties (e.g. spring.database.password).
 
 ## application.yml
-The [application.yml](/src/main/resources/application.yml) in this demo has following properties which are bind to k8s secrets:
+Our [application.yml](/src/main/resources/application.yml) has following properties which are bind to k8s secrets:
 
-* the user credential for mysql db: spring.datasource.username, spring.datasource.password
-* the password for redis db: spring.redis.password
-* the embedded user credential for spring security: spring.security.user.name, spring.security.user.password
+* **spring.datasource.username**, **spring.datasource.password** - for mysql database user credential
+* **spring.redis.password** - for redis db password
+* **spring.security.user.name**, **spring.security.user.password** - for spring security user credential
 
 ```yaml
 spring:
@@ -39,7 +39,7 @@ The list property **k8s.secret-mount** at the bottom includes all paths where th
 
 The **${k8s-secret.mysql-secret.mysql-passwd}** has 3 portions, the first portion **k8s-secret** is the prefix to indicate that property bind to k8s secret, the second portion **mysql-secret** maps with the last folder with the path **/usr/local/k8s/mysql-secret**, finally the third portion, **mysql-passwd** is the data entry defined in the secret.
 
-## k8s deployment manifest for spring boot application
+## k8s manifest for deploying our spring boot demo application
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
