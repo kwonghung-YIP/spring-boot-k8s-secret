@@ -41,6 +41,8 @@ The **${k8s-secret.mysql-secret.mysql-passwd}** has 3 portions, the first portio
 
 ## k8s manifest for deploying the spring boot application
 The spring boot application in this demo is deployed to k8s with following [manifest](), 3 secrets are mounted into the container and they can be read with the specified paths, those paths are identical with the **k8s.secret-mount** in the application.yml.
+
+https://docs.spring.io/spring-boot/docs/2.2.0.M4/reference/html/
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
