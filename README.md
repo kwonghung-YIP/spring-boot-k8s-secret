@@ -87,7 +87,7 @@ spec:
           secretName: user-secret
 ```
 
-## Customize EnvironmentPostProcessor to load kubernetes secrets into spring boot configuration
+# Customize EnvironmentPostProcessor to load kubernetes secrets into spring boot configuration
 The [Spring Boot Reference Document](https://docs.spring.io/spring-boot/docs/2.2.0.M4/reference/html/#howto-customize-the-environment-or-application-context) mentions about how to customize the Environment by using EnvironmentPostProcessor. The [K8sSecretPostProcessor](/src/main/java/hung/org/K8sSecretPostProcessor.java) in this repo will load the mounted secret files as environment properties. The class also need to be registered in the [META-INF/spring.factories](/src/main/resources/META-INF).
 
 ```properties
