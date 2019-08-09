@@ -1,6 +1,3 @@
-# Introduction
-This repo shows how to bind kubernetes secrets into spring boot password properties (e.g. spring.database.password).
-
 # How to mount kubernetes secret into "spring.datasource.password"
 The [application.yml](/src/main/resources/application.yml) in this repo has following properties which are mounted to kubernetes secrets:
 
