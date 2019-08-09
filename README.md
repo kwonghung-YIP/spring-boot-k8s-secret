@@ -106,8 +106,8 @@ chmod u+x run-katacoda.sh
 
 2. Once the spring boot service is up, grep the ClusterIP and test it with curl
 ```bash
-CLUSERIP=`kubectl get service springboot-svc -o=jsonpath='{.spec.clusterIP}'`
-curl -v --user john:abcd1234 $CLUSTERIP:8080
+CLUSTER_IP=`kubectl get service springboot-svc -o=jsonpath='{.spec.clusterIP}'`
+curl -v --user john:abcd1234 $CLUSTER_IP:8080
 ```
 
 # Run this demo in your local Microk8s
