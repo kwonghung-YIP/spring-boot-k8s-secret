@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-svc
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    pod-name: springboot-pod
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      pod-name: springboot-pod
+  template:
+    metadata:
+      name: springboot-pod
+      labels:
+        pod-name: springboot-pod
+    spec:
+      containers:
+      - name: springboot-app
+        image: kwonghung/spring-boot-k8s-secret:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: k8s,basicAuth
+        volumeMounts:
+        - name: mysql-secret
+          mountPath: "/usr/local/k8s/mysql-secret"
+          readOnly: true
+        - name: redis-secret
+          mountPath: "/usr/local/k8s/redis-secret"
+          readOnly: true
+        - name: user-secret
+          mountPath: "/usr/local/k8s/user-secret"
+          readOnly: true         
+      volumes:
+      - name: mysql-secret
+        secret:
+          secretName: mysql-secret
+      - name: redis-secret
+        secret:
+          secretName: redis-secret
+      - name: user-secret
+        secret:
+          secretName: user-secret
