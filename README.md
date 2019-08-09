@@ -94,19 +94,18 @@ The [Spring Boot Reference Document](https://docs.spring.io/spring-boot/docs/2.2
 org.springframework.boot.env.EnvironmentPostProcessor=hung.org.K8sSecretPostProcessor
 ```
 
-# Run this demo in [Katacoda - Kubernetes Playground](https://www.katacoda.com/courses/kubernetes/playground)
+# Run this repo in [Katacoda - Kubernetes Playground](https://www.katacoda.com/courses/kubernetes/playground)
+
+1. Clone this repo into the terminal and initiate the k8s objects
 ```bash
 git clone https://github.com/kwonghung-YIP/spring-boot-k8s-secret.git
 cd spring-boot-k8s-secret/k8s-manifest
-
+chmod u+x run-katacoda.sh
 ./run-katacoda.sh
-### --- or ---
-kubectl apply -f secrets.yaml
-kubectl create configmap redis-config --from-file redis.conf
-kubectl apply -f redis-service.yaml
-kubectl apply -f mysql-service.yaml
-kubectl apply -f springboot-app.yaml
+```
 
+2. Once the spring boot service is up, grep the ClusterIP and test it with curl
+```bash
 curl -v --user john:abcd1234 <springboot-svc's ClusterIP>:8080
 ```
 
