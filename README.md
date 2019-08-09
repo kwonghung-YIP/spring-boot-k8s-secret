@@ -1,14 +1,14 @@
 # Introduction
-This repo shows how to bind k8s secrets into spring boot password properties (e.g. spring.database.password).
+This repo shows how to bind kubernetes secrets into spring boot password properties (e.g. spring.database.password).
 
-# Our application.yml - How to mount k8s secret into "spring.datasource.password"
-The [application.yml](/src/main/resources/application.yml) in this repo has following properties which are mounted to k8s secrets:
+# How to mount kubernetes secret into "spring.datasource.password"
+The [application.yml](/src/main/resources/application.yml) in this repo has following properties which are mounted to kubernetes secrets:
 
 * **spring.datasource.username** and **spring.datasource.password** - for mysql database user credential
 * **spring.redis.password** - for redis db password
 * **spring.security.user.name** and **spring.security.user.password** - for spring security user credential
 
-The list property **k8s.secret-mount** at the bottom includes all paths where k8s secrets being mounted into our spring boot container. Take the first path **/usr/local/k8s/mysql-secret** as example, where it is the k8s secret **mysql-secret** being mounted as files into the container. The **mysql-secret** has a data entry **mysql-password**, which is pre-loaded and available as an environment property **${k8s-secret.mysql-secret.mysql-passwd}** within spring boot configuration. That property is refered by the default data source password property **spring.datasource.password**, and that's how to mount a k8s secret entry into the spring boot password property. 
+The list property **k8s.secret-mount** at the bottom includes all paths where kubernetes secrets being mounted into our spring boot container. Take the first path **/usr/local/k8s/mysql-secret** as example, where it is the kubernetes secret **mysql-secret** being mounted as files into the container. The **mysql-secret** has a data entry **mysql-password**, which is pre-loaded and available as an environment property **${k8s-secret.mysql-secret.mysql-passwd}** within spring boot configuration. That property is refered by the default data source password property **spring.datasource.password**, and that's how to mount a k8s secret entry into the spring boot password property. 
 
 ```yaml
 spring:
@@ -40,8 +40,8 @@ k8s:
 
 The **${k8s-secret.mysql-secret.mysql-passwd}** has 3 portions, the first portion **k8s-secret** is the prefix to indicate that property bind to k8s secret, the second portion **mysql-secret** maps with the last folder with the path **/usr/local/k8s/mysql-secret**, finally the third portion, **mysql-passwd** is the data entry defined in the secret.
 
-# Deploy our spring boot application into k8s
-The spring boot application in this demo is deployed to k8s with following [manifest](), 3 secrets are mounted into the container and they can be read with the specified paths, those paths are identical with the **k8s.secret-mount** in the application.yml.
+# Deploy the spring boot application into k8s
+The spring boot application in this repo is available in [docker hub](https://cloud.docker.com/u/kwonghung/repository/docker/kwonghung/spring-boot-k8s-secret) and following [manifest](/k8s-manifest/springboot-app.yaml) defines how to deploy it into k8s platform. Pay attention to the **volumneMounts** option, the **mountPath** of 3 k8s secrets are matched with those paths defined in above applications.yml.
 
 ```yaml
 apiVersion: apps/v1
@@ -89,9 +89,9 @@ spec:
         secret:
           secretName: user-secret
 ```
-## EnvironmentPostProcessor Implementation
 
-https://docs.spring.io/spring-boot/docs/2.2.0.M4/reference/html/
+## Customize EnvironmentPostProcessor to load kubernetes secrets into spring boot configuration
+The [Spring Boot Reference Document](https://docs.spring.io/spring-boot/docs/2.2.0.M4/reference/html/#howto-customize-the-environment-or-application-context) mentions about how to customize the Environment by using EnvironmentPostProcessor. The [K8sSecretPostProcessor](/src/main/java/hung/org/K8sSecretPostProcessor.java) in this repo will load the mounted secret files as environment properties. The class also need to be registered in the [META-INF/spring.factories](/src/main/resources/META-INF).
 
 ```properties
 org.springframework.boot.env.EnvironmentPostProcessor=hung.org.K8sSecretPostProcessor
