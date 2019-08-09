@@ -6,6 +6,7 @@ kubectl apply -f redis-service.yaml
 kubectl apply -f mysql-service.yaml
 kubectl apply -f springboot-basic-auth.yaml
 
+echo "Sleep for 1 min to wait for service start up..."
 sleep 60
 kubectl get all
 
