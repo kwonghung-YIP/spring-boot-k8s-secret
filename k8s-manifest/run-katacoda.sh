@@ -9,5 +9,5 @@ kubectl apply -f springboot-basic-auth.yaml
 sleep 60
 kubectl get all
 
-#CLUSERIP=`kubectl get service springboot-svc -o=jsonpath='{.spec.clusterIP}'`
-#curl -v --user john:abcd1234 $CLUSTERIP:8080
+#CLUSTER_IP=`kubectl get service springboot-svc -o=jsonpath='{.spec.clusterIP}'`
+#curl -v --user john:abcd1234 $CLUSTER_IP:8080
